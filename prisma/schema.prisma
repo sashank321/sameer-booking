@@ -1,0 +1,38 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String    @id @default(uuid())
+  email     String    @unique
+  password  String
+  name      String?
+  role      String    @default("USER") // USER or ADMIN
+  bookings  Booking[]
+  createdAt DateTime  @default(now())
+}
+
+model Booking {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  date        DateTime
+  startTime   Int // Hour (0-23)
+  duration    Int // Hours
+  totalPrice  Float
+  status      String   @default("PENDING") // PENDING, CONFIRMED, REJECTED, CANCELLED
+  notes       String?
+  createdAt   DateTime @default(now())
+}
+
+model Availability {
+  id        String   @id @default(uuid())
+  dayOfWeek Int // 0=Sunday, 1=Monday, etc.
+  startTime Int // Hour (0-23)
+  endTime   Int // Hour (0-23)
+}
