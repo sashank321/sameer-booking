@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import ScrollReveal from '@/components/ScrollReveal';
+import PhotoCarousel from '@/components/PhotoCarousel';
 
 export default function AboutPage() {
     return (
@@ -34,8 +35,8 @@ export default function AboutPage() {
                     <ScrollReveal>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.25rem', alignItems: 'stretch' }}>
                             <div className="conic-border-wrapper reveal" data-delay="0">
-                                <div className="glass-card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '340px', fontSize: '5.5rem' }}>
-                                    🐶
+                                <div style={{ display: 'flex', height: '100%', minHeight: '340px' }}>
+                                    <PhotoCarousel />
                                 </div>
                             </div>
 

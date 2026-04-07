@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import ScrollReveal from '@/components/ScrollReveal';
+import ParticleText from '@/components/ParticleText';
+import InfiniteCarousel from '@/components/InfiniteCarousel';
 
 const features = [
     {
@@ -57,34 +59,62 @@ export default function Home() {
             {/* Section Counter */}
             <div className="section-counter">01 / 02</div>
 
-            {/* Hero Section */}
-            <section className="section-full framed-section" style={{ minHeight: '92vh', justifyContent: 'center' }}>
-                <ScrollReveal>
-                    <div className="conic-border-wrapper reveal">
-                        <div className="glass-card" style={{ maxWidth: '720px', width: '100%', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <div style={{ fontSize: '56px', marginBottom: '1.25rem', lineHeight: 1 }}>🐶</div>
-                            <h1 className="mask-text display-hero" style={{ marginBottom: '0.75rem' }}>
-                                Sameer.
-                            </h1>
-                            <h2 className="sub-heading" style={{ marginBottom: '2rem', textAlign: 'center' }}>
+            {/* Spatial Overlap Epic Hero Section */}
+            <section style={{ minHeight: '100vh', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', paddingTop: '4rem' }}>
+                
+                {/* Background Full Width Scrolling Marquee */}
+                <ScrollReveal style={{ position: 'absolute', top: '15%', right: '-5vw', width: '90vw', height: '70vh', zIndex: 0, opacity: 0.95, transform: 'rotate(-2deg)' }}>
+                   <div className="reveal" data-delay="0.2" style={{ width: '100%', height: '100%' }}>
+                       <InfiniteCarousel speed={1.2} borderless={true} />
+                   </div>
+                </ScrollReveal>
+
+                <div className="container" style={{ position: 'relative', zIndex: 10, width: '100%', maxWidth: '1400px', margin: '0 auto' }}>
+                    
+                    {/* Foreground Floating Island */}
+                    <ScrollReveal>
+                        <div className="reveal" style={{ 
+                            background: 'rgba(20, 20, 20, 0.65)', 
+                            backdropFilter: 'blur(48px) saturate(200%)', 
+                            WebkitBackdropFilter: 'blur(48px) saturate(200%)',
+                            borderRadius: '32px', 
+                            border: '1px solid rgba(255, 255, 255, 0.15)', 
+                            borderTop: '1px solid rgba(255, 255, 255, 0.3)',
+                            boxShadow: '0 32px 80px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.2)',
+                            maxWidth: '680px',
+                            padding: '5rem 4.5rem',
+                            marginTop: '2rem'
+                        }}>
+                            
+                            <div style={{ display: 'inline-block', alignSelf: 'flex-start', padding: '8px 18px', background: 'rgba(255,255,255,0.06)', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.15)', marginBottom: '1.5rem', backdropFilter: 'blur(10px)' }}>
+                                <span style={{ fontSize: '13px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.95)' }}>
+                                    Exclusive Booking
+                                </span>
+                            </div>
+                            
+                            <div style={{ margin: '0 0 0 -2.5rem', width: '120%' }}>
+                                <ParticleText text="Sameer." align="left" />
+                            </div>
+                            
+                            <h2 style={{ fontSize: '38px', fontWeight: 300, letterSpacing: '-0.5px', marginBottom: '1.5rem', color: 'rgba(255,255,255,0.95)' }}>
                                 The perfect companion.
                             </h2>
-
-                            <p className="body-standard" style={{ color: 'var(--text-secondary)', marginBottom: '2.5rem', maxWidth: '440px', textAlign: 'center' }}>
-                                Book hourly sessions with the goodest boy in town for walks, playdates, or just quiet afternoons.
+                            <p style={{ fontSize: '20px', lineHeight: 1.6, color: 'var(--text-secondary)', marginBottom: '3rem', maxWidth: '480px' }}>
+                                Schedule exclusive hourly sessions for casual hangouts, creative photoshoots, or just quiet afternoons. Experience the elite standard.
                             </p>
 
-                            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
-                                <Link href="/book" className="btn-primary">
+                            <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                                <Link href="/book" className="btn-primary" style={{ padding: '18px 36px', fontSize: '18px', fontWeight: 500, boxShadow: '0 12px 32px rgba(191, 90, 242, 0.5)', transition: 'all 0.3s ease' }}>
                                     Book Sameer
                                 </Link>
-                                <Link href="/about" className="btn-secondary">
+                                <Link href="/about" className="btn-secondary" style={{ padding: '18px 36px', fontSize: '18px', background: 'rgba(255,255,255,0.05)' }}>
                                     Learn more
                                 </Link>
                             </div>
                         </div>
-                    </div>
-                </ScrollReveal>
+                    </ScrollReveal>
+
+                </div>
             </section>
 
             {/* Features Section — Hover Carousel */}
