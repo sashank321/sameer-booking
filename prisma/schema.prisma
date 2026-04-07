@@ -1,5 +1,5 @@
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -12,7 +12,7 @@ model User {
   email     String    @unique
   password  String
   name      String?
-  role      String    @default("USER") // USER or ADMIN
+  role      String    @default("USER")
   bookings  Booking[]
   createdAt DateTime  @default(now())
 }
@@ -22,17 +22,17 @@ model Booking {
   userId      String
   user        User     @relation(fields: [userId], references: [id])
   date        DateTime
-  startTime   Int // Hour (0-23)
-  duration    Int // Hours
+  startTime   Int
+  duration    Int
   totalPrice  Float
-  status      String   @default("PENDING") // PENDING, CONFIRMED, REJECTED, CANCELLED
+  status      String   @default("PENDING")
   notes       String?
   createdAt   DateTime @default(now())
 }
 
 model Availability {
   id        String   @id @default(uuid())
-  dayOfWeek Int // 0=Sunday, 1=Monday, etc.
-  startTime Int // Hour (0-23)
-  endTime   Int // Hour (0-23)
+  dayOfWeek Int
+  startTime Int
+  endTime   Int
 }

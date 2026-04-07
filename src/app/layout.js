@@ -1,6 +1,9 @@
 import Providers from '@/components/Providers';
 import Navbar from '@/components/Navbar';
+import dynamic from 'next/dynamic';
 import '@/styles/globals.css';
+
+const Background = dynamic(() => import('@/components/Background'), { ssr: false });
 
 export const metadata = {
     title: 'Sameer – Book Your Dog Companion',
@@ -12,13 +15,19 @@ export default function RootLayout({ children }) {
         <html lang="en">
             <body>
                 <Providers>
-                    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-                        <Navbar />
-                        <main style={{ flex: 1 }}>{children}</main>
-                        <footer style={{ padding: '2rem', textAlign: 'center', backgroundColor: 'var(--surface)', marginTop: '4rem' }}>
-                            <p style={{ color: 'var(--text-muted)' }}>&copy; {new Date().getFullYear()} Sameer Dog Booking. All wags reserved.</p>
-                        </footer>
-                    </div>
+                    <Background />
+                    <Navbar />
+                    <main>{children}</main>
+                    <footer style={{
+                        padding: '2rem 1rem',
+                        textAlign: 'center',
+                        marginTop: '2rem',
+                        borderTop: '1px solid rgba(255, 255, 255, 0.04)',
+                    }}>
+                        <p className="body-caption" style={{ color: 'var(--text-tertiary)' }}>
+                            &copy; {new Date().getFullYear()} Sameer Dog Booking. All wags reserved.
+                        </p>
+                    </footer>
                 </Providers>
             </body>
         </html>

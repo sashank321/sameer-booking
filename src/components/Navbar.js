@@ -7,22 +7,22 @@ export default function Navbar() {
     const { data: session } = useSession();
 
     return (
-        <nav style={{ borderBottom: '1px solid var(--border)', backgroundColor: 'var(--background)' }}>
-            <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '4rem' }}>
-                <Link href="/" style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--primary)' }}>
+        <nav className="glass-nav">
+            <div className="nav-container">
+                <Link href="/" className="nav-link" style={{ fontSize: '14px', fontWeight: 'bold' }}>
                     Sameer 🐾
                 </Link>
-                <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-                    <Link href="/about">About Sameer</Link>
-                    <Link href="/book">Book Now</Link>
+                <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+                    <Link href="/about" className="nav-link">About Sameer</Link>
+                    <Link href="/book" className="nav-link">Book Now</Link>
 
                     {session ? (
-                        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                            <span>Hi, {session.user.name || 'Friend'}</span>
+                        <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+                            <span className="nav-link" style={{ opacity: 0.8 }}>Hi, {session.user.name || 'Friend'}</span>
                             <button
                                 onClick={() => signOut()}
-                                className="btn btn-outline"
-                                style={{ fontSize: '0.875rem', padding: '0.5rem 1rem' }}
+                                className="nav-link"
+                                style={{ opacity: 0.8 }}
                             >
                                 Sign Out
                             </button>
@@ -30,7 +30,7 @@ export default function Navbar() {
                     ) : (
                         <button
                             onClick={() => signIn()}
-                            className="btn btn-primary"
+                            className="nav-link"
                         >
                             Log In
                         </button>

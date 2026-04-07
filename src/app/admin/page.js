@@ -16,47 +16,56 @@ export default async function AdminPage() {
     });
 
     return (
-        <div className="container" style={{ padding: '4rem 1rem' }}>
-            <h1 style={{ fontSize: '2rem', marginBottom: '2rem' }}>Admin Dashboard</h1>
+        <section className="section-full" style={{ minHeight: '85vh', paddingTop: '4rem' }}>
+            <div className="container">
+                <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+                    <div style={{ fontSize: '36px', marginBottom: '0.75rem', lineHeight: 1 }}>🛠️</div>
+                    <h1 className="heading-section" style={{ fontSize: '30px', marginBottom: '0.5rem' }}>Admin Dashboard</h1>
+                    <p className="body-caption" style={{ color: 'var(--text-tertiary)' }}>
+                        {bookings.length} booking{bookings.length !== 1 ? 's' : ''} total
+                    </p>
+                </div>
 
-            <div style={{ backgroundColor: 'white', border: '1px solid var(--border)', borderRadius: 'var(--radius)', overflow: 'hidden' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                    <thead style={{ backgroundColor: 'var(--surface)' }}>
-                        <tr>
-                            <th style={{ padding: '1rem', textAlign: 'left' }}>User</th>
-                            <th style={{ padding: '1rem', textAlign: 'left' }}>Date</th>
-                            <th style={{ padding: '1rem', textAlign: 'left' }}>Time</th>
-                            <th style={{ padding: '1rem', textAlign: 'left' }}>Duration</th>
-                            <th style={{ padding: '1rem', textAlign: 'left' }}>Total</th>
-                            <th style={{ padding: '1rem', textAlign: 'left' }}>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {bookings.length === 0 ? (
-                            <tr><td colSpan="6" style={{ padding: '2rem', textAlign: 'center' }}>No bookings found.</td></tr>
-                        ) : bookings.map((booking) => (
-                            <tr key={booking.id} style={{ borderTop: '1px solid var(--border)' }}>
-                                <td style={{ padding: '1rem' }}>{booking.user?.name || booking.user?.email}</td>
-                                <td style={{ padding: '1rem' }}>{new Date(booking.date).toLocaleDateString()}</td>
-                                <td style={{ padding: '1rem' }}>{booking.startTime}:00</td>
-                                <td style={{ padding: '1rem' }}>{booking.duration} hr(s)</td>
-                                <td style={{ padding: '1rem' }}>${booking.totalPrice}</td>
-                                <td style={{ padding: '1rem' }}>
-                                    <span style={{
-                                        padding: '0.25rem 0.5rem',
-                                        borderRadius: '999px',
-                                        fontSize: '0.875rem',
-                                        backgroundColor: booking.status === 'CONFIRMED' ? '#c6f6d5' : '#fed7d7',
-                                        color: booking.status === 'CONFIRMED' ? '#22543d' : '#822727'
-                                    }}>
-                                        {booking.status}
-                                    </span>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                {bookings.length === 0 ? (
+                    <div className="glass-card" style={{ textAlign: 'center', padding: '4rem 2rem' }}>
+                        <div style={{ fontSize: '48px', marginBottom: '1rem', lineHeight: 1 }}>📭</div>
+                        <p className="body-standard" style={{ color: 'var(--text-secondary)' }}>No bookings yet. Sameer is waiting!</p>
+                    </div>
+                ) : (
+                    <div className="glass-card" style={{ padding: '0', overflow: 'hidden' }}>
+                        <div className="admin-table-wrapper">
+                            <table className="glass-table">
+                                <thead>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Duration</th>
+                                        <th>Total</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {bookings.map((booking) => (
+                                        <tr key={booking.id}>
+                                            <td>{booking.user?.name || booking.user?.email}</td>
+                                            <td>{new Date(booking.date).toLocaleDateString()}</td>
+                                            <td>{booking.startTime}:00</td>
+                                            <td>{booking.duration} hr{booking.duration > 1 ? 's' : ''}</td>
+                                            <td style={{ color: 'var(--accent-bright)', fontWeight: '600' }}>${booking.totalPrice}</td>
+                                            <td>
+                                                <span className={`status-badge ${booking.status === 'CONFIRMED' ? 'status-confirmed' : 'status-pending'}`}>
+                                                    {booking.status}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                )}
             </div>
-        </div>
+        </section>
     );
 }
